@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'services/cat_service.dart';
+import 'package:provider/provider.dart';
+import 'providers/cat_provider.dart';
+import 'screens/main_navigation_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => CatProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -12,30 +19,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Test API Kucing')),
-        body: FutureBuilder(
-          future: CatService().getCats(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
-            }
-            final cats = snapshot.data!;
-            return ListView.builder(
-              itemCount: cats.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(cats[index].breed),
-                  subtitle: Text(cats[index].country),
-                );
-              },
-            );
-          },
-        ),
-      ),
+      title: 'CatPedia',
+      home: const MainNavigationPage(),
     );
   }
 }
