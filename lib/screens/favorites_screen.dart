@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'edit_adoption_screen.dart'; 
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -28,14 +29,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       });
     } catch (e) {
       setState(() => isLoading = false);
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Gagal memuat data: $e'), backgroundColor: Colors.red),
-      );
     }
   }
 
-  
   Future<void> _hapusAdopsi(int id) async {
     final konfirmasi = await showDialog<bool>(
       context: context,
@@ -43,10 +39,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         title: const Text('Konfirmasi'),
         content: const Text('Yakin ingin menghapus data adopsi ini?'),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Batal'),
-          ),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Batal')),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
@@ -58,7 +51,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
     if (konfirmasi == true) {
       await supabase.from('adoptions').delete().eq('id', id);
-      _loadAdopsi(); // Refresh list setelah hapus
+      _loadAdopsi();
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Data berhasil dihapus'), backgroundColor: Colors.green),
@@ -92,9 +85,28 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                         title: Text(item['cat_name'] ?? 'Tanpa Nama', style: const TextStyle(fontWeight: FontWeight.bold)),
                         subtitle: Text('${item['breed']} • ${item['location']}\n${item['description']}'),
                         isThreeLine: true,
-                        trailing: IconButton(
-                          icon: const Icon(Icons.delete, color: Colors.red),
-                          onPressed: () => _hapusAdopsi(item['id']),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            // TOMBOL EDIT (PENSIL)
+                            IconButton(
+                              icon: const Icon(Icons.edit, color: Colors.blue),
+                              onPressed: () async {
+                                final updated = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => EditAdoptionScreen(adopsiData: item),
+                                  ),
+                                );
+                                if (updated == true) _loadAdopsi(); 
+                              },
+                            ),
+                            
+                            IconButton(
+                              icon: const Icon(Icons.delete, color: Colors.red),
+                              onPressed: () => _hapusAdopsi(item['id']),
+                            ),
+                          ],
                         ),
                       ),
                     );
