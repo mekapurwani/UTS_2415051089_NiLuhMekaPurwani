@@ -1,17 +1,18 @@
-# uts_catpedia
+# UTS Pemrograman Mobile - CatAdopt
 
-A new Flutter project.
+**Nama:** Ni Luh Meka Purwani  
+**NIM:** 2415051089  
+**Kelas:** PTI 5A
 
-## Getting Started
+## Deskripsi Aplikasi
+CatAdopt adalah aplikasi mobile berbasis Flutter yang dirancang untuk membantu proses adopsi kucing. Aplikasi ini menampilkan berbagai ras kucing dari API, lengkap dengan fitur simpan ke database.
 
-This project is a starting point for a Flutter application.
+## Fitur Utama
+- **REST API:** Mengambil data ras kucing dari `catfact.ninja`.
+- **Database & CRUD:** Menggunakan Supabase untuk menyimpan (Create) dan menghapus (Delete) data adopsi.
+- **State Management:** Menggunakan Provider.
+- **UI Responsif:** Layout Grid modern, form input, dan navigasi tab.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Cara Menjalankan
+1. `flutter pub get`
+2. `flutter run`
