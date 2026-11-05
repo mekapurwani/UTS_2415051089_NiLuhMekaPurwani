@@ -28,7 +28,7 @@ class _CatListScreenState extends State<CatListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Daftar Kucing')),
+      appBar: AppBar(title: const Text('List Cats')),
       body: Consumer<CatProvider>(
         builder: (context, provider, child) {
           if (provider.isLoading) {

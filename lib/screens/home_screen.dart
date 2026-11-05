@@ -113,7 +113,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 12),
             Row(
               children: [
-                _buildCategoryItem('Kucing', Icons.pets, isActive: true),
+                _buildCategoryItem('Cat', Icons.pets, isActive: true),
               ],
             ),
             const SizedBox(height: 24),

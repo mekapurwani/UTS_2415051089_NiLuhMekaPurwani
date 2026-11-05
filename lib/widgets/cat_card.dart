@@ -25,7 +25,11 @@ class CatCard extends StatelessWidget {
           color: cardColor, 
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
-            BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, 4)),
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05), 
+              blurRadius: 10, 
+              offset: const Offset(0, 4)
+            )
           ],
         ),
         child: Column(
@@ -36,12 +40,13 @@ class CatCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
                 child: Image.network(
-                  cat.imageUrl,
-                  width: double.infinity,
+                  cat.imageUrl, 
+                  width: double.infinity, 
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(color: Colors.grey.shade200, child: const Icon(Icons.pets));
-                  },
+                  errorBuilder: (context, error, stackTrace) => Container(
+                    color: Colors.grey.shade200, 
+                    child: const Icon(Icons.pets)
+                  ),
                 ),
               ),
             ),
@@ -55,19 +60,27 @@ class CatCard extends StatelessWidget {
                   children: [
                     Text(
                       cat.breed, 
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black87),
+                      maxLines: 1, 
+                      overflow: TextOverflow.ellipsis, 
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(cat.price, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: Color(0xFFF2855C))),
+                        Text(
+                          cat.price, 
+                          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: Color(0xFFF2855C))
+                        ),
                         Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             const Icon(Icons.location_on, size: 12, color: Colors.black54),
                             const SizedBox(width: 2),
-                            const Text('Bali', style: TextStyle(fontSize: 11, color: Colors.black54)),
+                      
+                            Text(
+                              cat.location, 
+                              style: const TextStyle(fontSize: 11, color: Colors.black54)
+                            ),
                           ],
                         )
                       ],

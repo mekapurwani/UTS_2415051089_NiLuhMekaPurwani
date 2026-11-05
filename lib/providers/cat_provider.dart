@@ -26,6 +26,10 @@ class CatProvider extends ChangeNotifier {
         'Rp 1.000.000',
       ];
 
+      final List<String> dummyLocations = [
+        'Denpasar', 'Badung', 'Gianyar', 'Tabanan', 'Buleleng', 'Klungkung'
+      ];
+
       cats = fetchedCats.asMap().entries.map((entry) {
         int index = entry.key;
         Cat cat = entry.value;
@@ -37,6 +41,7 @@ class CatProvider extends ChangeNotifier {
           coat: cat.coat,
           pattern: cat.pattern,
           price: dummyPrices[index % dummyPrices.length], 
+          location: dummyLocations[index % dummyLocations.length], 
         );
       }).toList();
 

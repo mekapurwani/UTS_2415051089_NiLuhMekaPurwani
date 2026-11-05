@@ -5,6 +5,7 @@ class Cat {
   final String coat;
   final String pattern;
   final String price;
+  final String location;
   final String imageUrl;
 
   Cat({
@@ -14,6 +15,7 @@ class Cat {
     required this.coat,
     required this.pattern,
     this.price = 'Rp 1.500.000', 
+    this.location = 'Denpasar',
     String? imageUrl,
   }) : imageUrl = imageUrl ?? 'https://cataas.com/cat?width=400&height=400&t=$breed';
 
