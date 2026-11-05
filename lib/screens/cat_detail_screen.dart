@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/cat.dart';
+import 'adoption_form_screen.dart';
 
 class CatDetailScreen extends StatelessWidget {
   final Cat cat;
@@ -77,8 +78,17 @@ class CatDetailScreen extends StatelessWidget {
                     width: double.infinity, height: 55,
                     child: ElevatedButton(
                       onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${cat.breed} ditambahkan ke daftar adopsi!')));
-                      },
+                        Navigator.push(
+                              context, 
+                              MaterialPageRoute(
+                                builder: (_) => AdoptionFormScreen(
+                                  breed: cat.breed,
+                                  price: cat.price,
+                                  location: cat.location,
+                                )
+                              )
+                            );
+                          },
                       style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFF2855C), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
                       child: const Text('Adopsi Sekarang', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
                     ),
